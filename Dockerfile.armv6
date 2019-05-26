@@ -1,0 +1,11 @@
+FROM arm32v6/python:2.7-alpine
+RUN apk add glib-dev gcc g++ make libffi-dev openssl-dev
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD monitor.py
