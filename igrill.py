@@ -36,7 +36,7 @@ class IDevicePeripheral(btle.Peripheral):
         """
         Connects to the device given by address performing necessary authentication
         """
-        logging.debug("Trying to connect to the device with address {}".format(address))
+        logging.info("Trying to connect to the device with address {}".format(address))
         with self.btle_lock:
             logging.debug("Calling btle.Peripheral.__init__ with lock: {}".format(id(self.btle_lock)))
             btle.Peripheral.__init__(self, address)
@@ -211,19 +211,20 @@ class DeviceThread(threading.Thread):
     def run(self):
         while self.run_event.is_set():
             try:
-                logging.debug("Device thread {} (re)started, trying to connect to iGrill with address: {}".format(self.name, self.address))
+                logging.info("Device thread {} (re)started, trying to connect to iGrill with address: {}".format(self.name, self.address))
                 device = self.device_types[self.type](self.address, self.name)
                 self.mqtt_client.reconnect()
                 while True:
                     temperature = device.read_temperature()
                     battery = device.read_battery()
                     utils.publish(temperature, battery, self.mqtt_client, self.topic, device.name)
-                    logging.debug("Published temp: {} and battery: {} to topic {}/{}".format(temperature, battery, self.topic, device.name))
+                    logging.info("Published temp: {} and battery: {} to topic {}/{}".format(temperature, battery, self.topic, device.name))
                     logging.debug("Sleeping for {} seconds".format(self.interval))
                     time.sleep(self.interval)
             except Exception as e:
+                logging.info("Encountered exception publishing: {}".format(type(e).__name__))
                 logging.debug(e)
-                logging.debug("Sleeping for {} seconds before retrying".format(self.interval))
+                logging.info("Sleeping for {} seconds before retrying".format(self.interval))
                 time.sleep(self.interval)
 
         logging.debug('Thread exiting')
