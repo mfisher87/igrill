@@ -10,8 +10,8 @@ Monitor your iGrill (mini, v2 or v3) (with a Raspberry Pi 1/2/3) - and an forwar
 ## Installation
 1. clone this repo
 1. install required modules (see requirements.txt)
-1. Add at least one device config (see ./exampleconfig/device.yaml) - to find your device MAC just run `hcitool lescan`
-1. start application `./monitor.py`
+1. create a config directory and add at least one device config (see ./exampleconfig/device.yaml). To find your device MAC just run `hcitool lescan`
+1. start application `./monitor.py -c <config_location>` or set up systemd service
 1. enjoy
 
 ### systemd startup-script
