@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  igrill:
+    image: igrill
+    build:
+      context: .
+      dockerfile: Dockerfile.armv6
+    container_name: igrill
+    privileged: true
+    network_mode: host
+    restart: always
