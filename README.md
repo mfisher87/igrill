@@ -1,20 +1,26 @@
 # iGrill
 Monitor your iGrill (mini, v2 or v3) (with a Raspberry Pi 1/2/3) - and an forward it to an mqtt-server
 
-Tested on a Pi 3 with iGrill v3. I haven't been able to get this to work on a Pi Zero yet.
+Tested on a Pi 3 and Pi Zero W with iGrill v3.
+
 
 ## What do you need
+
 ### Hardware
+
 * An iGrill Device (and at least one probe) - [iGrill mini](https://www.weber.com/US/en/accessories/cooking/igrill-and-thermometers/7202.html?cgid=1339#start=1), [iGrill v2](https://www.weber.com/US/en/accessories/cooking/igrill-and-thermometers/7203.html?cgid=1339#start=1) or [igrill v3](https://www.weber.com/US/en/accessories/cooking/igrill-and-thermometers/7204.html?cgid=1339#start=1)
 * A bluetooth enabled computer - preferable a raspberry pi
 * A mqtt server as message receiver
 
+
 ## Installation
+
 1. clone this repo
 1. install required modules (see requirements.txt)
 1. create a config directory and add at least one device config (see ./exampleconfig/device.yaml). To find your device MAC just run `hcitool lescan`
 1. start application `./monitor.py -c <config_location>` or set up systemd service
 1. enjoy
+
 
 ### systemd startup-script
 
@@ -38,6 +44,7 @@ WantedBy=multi-user.target
 Run `systemctl daemon-reload && systemctl enable igrill && systemctl start igrill`
 
 Next time you reboot, the iGrill service will connect and reconnect if something goes wrong...
+
 
 ## Troubleshooting
 
