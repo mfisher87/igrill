@@ -26,9 +26,9 @@ Tested with Docker on a Pi 3 and Pi Zero W with iGrill v3.
    ./exampleconfig/device.yaml). To find your device MAC just run
    `hcitool lescan`
 1. start application, any of:
-  * Run in docker (recommended): `docker-compose up -d`
-  * Run manually: `./monitor.py -c <config_location>`
-  * Set up systemd service (see below)
+    * Run in docker (recommended): `docker-compose up -d`
+    * Run manually: `./monitor.py -c <config_location>`
+    * Set up systemd service (see below)
 
 
 ### systemd startup-script
