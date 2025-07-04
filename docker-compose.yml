@@ -9,3 +9,10 @@ services:
     privileged: true
     network_mode: host
     restart: always
+    logging:
+      # This is running on a low-power device, and the "local" driver is an
+      # optimized binary format. Default is JSON.
+      driver: "local"
+      options:
+        max-size: "5m"
+        max-files: 3
